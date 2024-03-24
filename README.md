@@ -4,14 +4,21 @@ A demo app for showing how to use [vault-maven-plugin](https://github.com/HomeOf
 A simple spring-boot application that needs some friend name setup in its applicaton.properties.  
 The name of the friends is private for every person using the app, so it will be fetched from a Vault.  
 
-For the demo you will need a Vault instance.  
-If you do not have one already working, you can use a docker instance used for the integration tests of the maven plugin.  
-Just download the [project](), and run `mvn docker:start`. It will initiate the Vault container.  
+For the demo you will need a Vault instance.    
+If you do have one already working skip directly to the following chapter to run the project.  
+
+If not, , you can use a docker instance used for the integration tests of the maven plugin.  
+Just clone the [project](https://github.com/HomeOfTheWizard/vault-maven-plugin), and run `mvn docker:start`. It will initiate the Vault container.  
 
 * ⚠️ The Vault is accessible via https through an nginx proxy. Its certificate is created for the hostname `nginx.docker`.  
-  So in case you are on windows, you have to add an entry to your `hosts` file under `C:\Windows\System32\drivers\etc`.  
-  When this is done, you will be able to communicate with this Vault via the hostname `nginx.docker`.
-  This is as well the vault url setup in this demo by default, if you are using another Vault instance, you have to change the config in the pom.xml of this project.
+  So in case you are on windows, you have to add an entry to your `hosts` file under `C:\Windows\System32\drivers\etc`.
+  Add the following lines in it:
+  ```shell
+  127.0.0.1 nginx.docker
+  127.0.0.1 vault.docker
+  ```
+  When this is done, you will be able to communicate with this Vault via the hostname `nginx.docker`.  
+  This is as well the vault url setup in this demo by default, if you are using another Vault instance, you have to change the config in the pom.xml of this project.  
 
 * Also the docker instance setup for the plugin uses a [hardcoded admin token](https://github.com/HomeOfTheWizard/vault-maven-plugin/blob/1ee3a4f2f80efc4bebc3a7ea69b2f6a20820188b/pom.xml#L49) for authentication.
   If you want to use this vault instance, you should use this same token on this demo project to communicate with it.
